@@ -1,0 +1,370 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #000;
+  color: white;
+}
+
+/* Styles communs */
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  filter: brightness(1000%);
+}
+
+/* Page d'accueil */
+body.home-page main.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+body.home-page main.home-center {
+  height: 100vh;             /* prend toute la hauteur écran */
+  display: flex;
+  flex-direction: column;    /* empile vinyle + bouton verticalement */
+  justify-content: center;   /* centre verticalement */
+  align-items: center;       /* centre horizontalement */
+  gap: 20px;                 /* espace entre vinyle et bouton */
+}
+
+.album-grid a {
+  position: relative;  
+  display: inline-block; /* s’adapte à la taille du contenu (image) */
+  width: fit-content; /* force la largeur au contenu */
+  padding: 0;
+  margin: 0;
+  text-decoration: none; /* pas de soulignement */
+}
+
+.album-grid a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;   /* taille plus contenue */
+  height: 160px;
+  border-radius: 50%;  /* forme circulaire plus naturelle pour la lumière */
+  filter: blur(30px);
+  transform: translate(-50%, -50%);
+  opacity: 0.25;       /* un peu visible au départ */
+  z-index: -1;
+
+  background: linear-gradient(270deg, 
+    #ff008c, #00c8ff, #00ff64, #ffc800, #ff008c);
+
+  background-size: 800% 800%;
+  animation: gradientShift 15s ease infinite;
+
+  transition: opacity 0.6s ease;
+}
+
+.album-grid a:hover::before {
+  opacity: 0.9;  /* intensité beaucoup plus forte au hover */
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.album-grid img {
+  display: block; /* évite les petits espaces sous l’image */
+  width: 150px;   /* ou la taille que tu veux */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Page album */
+body.album-page main.album-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+body.album-page, html.album-page {
+  overflow: hidden;
+  height: 100%;
+}
+
+body.album-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+body.album-page main.album-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  z-index: 1;
+}
+
+header {
+  flex: 0 0 auto;
+  padding: 20px;
+}
+
+main.album-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.album-info img.cover {
+  width: 80%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.album-info img.cover:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.streaming-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.streaming-links img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+.streaming-links img:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+}
+
+/* 🎨 FOND ANIMÉ SUR PAGE ALBUM */
+body.album-page {
+  position: relative;
+  background-color: #000; /* Couleur de base */
+  overflow: hidden;
+  min-height: 100vh;
+  z-index: 0;
+}
+
+/* Blobs colorés animés */
+body.album-page.discovery-page::before {
+  content: "";
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 230%;
+  height: 230%;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(60, 90, 255, 0.25) 0%, transparent 55%),   /* Bleu en haut gauche, atténué */
+    radial-gradient(circle at 70% 60%, rgba(255, 60, 60, 0.4) 0%, transparent 50%),    /* Rouge plus vif en bas droit */
+    radial-gradient(circle at 50% 50%, rgba(255, 30, 30, 0.2) 0%, transparent 60%),    /* Rouge au centre très doux */
+    radial-gradient(circle at 80% 20%, rgba(255, 50, 50, 0.2) 0%, transparent 60%),    /* Rouge haut droit */
+    radial-gradient(circle at 20% 80%, rgba(60, 60, 255, 0.2) 0%, transparent 50%);    /* Bleu bas gauche léger */
+  opacity: 0.38;
+  filter: blur(110px);
+  animation: moveBlobs 30s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes moveBlobs {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-2%, -1%) scale(1.05);
+  }
+  50% {
+    transform: translate(1%, 2%) scale(1.03);
+  }
+  75% {
+    transform: translate(-1%, 1%) scale(1.04);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes float-random-1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, -4px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float-random-2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -1px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(1px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float-random-3 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, 2px); }
+  50% { transform: translate(-3px, 1px); }
+  75% { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes float-random-4 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 3px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.streaming-links a:nth-child(1) img {
+  animation: float-random-1 6s ease-in-out infinite;
+}
+
+.streaming-links a:nth-child(2) img {
+  animation: float-random-2 7s ease-in-out infinite;
+}
+
+.streaming-links a:nth-child(3) img {
+  animation: float-random-3 5.5s ease-in-out infinite;
+}
+
+.streaming-links a:nth-child(4) img {
+  animation: float-random-4 6.5s ease-in-out infinite;
+}
+
+.streaming-links img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.streaming-links img:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.album-info img.cover,
+.streaming-links a {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.album-info img.cover {
+  animation-delay: 0.3s;
+}
+
+.streaming-links a:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.streaming-links a:nth-child(2) {
+  animation-delay: 0.7s;
+}
+.streaming-links a:nth-child(3) {
+  animation-delay: 0.9s;
+}
+.streaming-links a:nth-child(4) {
+  animation-delay: 1.1s;
+}
+
+.vinyle {
+  width: 100px;
+  height: 100px;
+  filter: invert(1);
+  animation: rotation 4s linear infinite;
+  transform-origin: 50% 50%; /* ou center center, c’est pareil */
+  position: relative;
+
+  margin: 0 auto;          /* centre horizontalement */
+  display: block;          /* pour que margin auto fonctionne */
+}
+
+.vinyle img {
+  width: 90px;
+  height: 90px;
+  filter: brightness(100%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.home-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100%; */  /* supprimer cette ligne */
+  margin: 0 auto;
+  padding: 20px 0;
+  box-sizing: border-box;
+  cursor: pointer; /* pour le pointer au passage */
+  max-width: 100px; /* limite la largeur au vinyle */
+}
+
