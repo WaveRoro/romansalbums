@@ -31,5 +31,33 @@
       </a>
     </div>
   </main>
+  <!-- à la fin de chaque page HTML, avant </body> -->
+<script>
+  // Au chargement, forcer opacité à 0
+document.body.style.opacity = 0;
+
+window.addEventListener('load', () => {
+  // fade-in sur chargement complet
+  document.body.style.transition = "opacity 0.5s";
+  document.body.style.opacity = 1;
+});
+
+// Pour tous les liens
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    if (this.target === "_blank" || this.href.indexOf('#') > -1) return;
+
+    e.preventDefault();
+    const href = this.href;
+
+    document.body.style.transition = "opacity 0.5s";
+    document.body.style.opacity = 0; // fade-out
+
+    setTimeout(() => {
+      window.location = href;
+    }, 500);
+  });
+});
+</script>
 </body>
 </html>
