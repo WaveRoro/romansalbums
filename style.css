@@ -27,10 +27,20 @@ header {
 
 /* Page d'accueil */
 body.home-page main.album-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* aligne verticalement si besoin */
+  gap: 60px;               /* espace égal entre les albums */
+  padding: 40px 0;
+  flex-wrap: wrap;         /* utile pour mobile */
+}
+
+@media (max-width: 600px) {
+  body.home-page main.album-grid {
+    grid-template-columns: 1fr; /* une seule colonne sur mobile */
+    padding: 24px;              /* mêmes marges que le gap */
+    gap: 24px;                  /* même espace entre albums */
+  }
 }
 
 body.home-page main.home-center {
