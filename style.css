@@ -317,6 +317,22 @@ body.album-page.dinnerparty-page::before {
   100% { transform: translate(0%, 0%) scale(1); }
 }
 
+@media (max-width: 768px) {
+  .orb-1 {
+    top: 10%;
+    left: 10%;
+    width: 150%;
+    height: 150%;
+  }
+
+  .orb-2 {
+    top: 30%;
+    left: 30%;
+    width: 150%;
+    height: 150%;
+  }
+}
+
 .streaming-links a:nth-child(1) img {
   animation: float-random-1 6s ease-in-out infinite;
 }
@@ -428,3 +444,8 @@ body {
   transition: opacity 0.5s;
 }
 
+html, body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
