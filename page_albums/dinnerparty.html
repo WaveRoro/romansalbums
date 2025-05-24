@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dinner Party Dessert - Dinner Party</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="album-page dinnerparty-page">
+  <div class="light-orbs-container">
+  <div class="light-orb orb-1"></div>
+  <div class="light-orb orb-2"></div>
+</div>
+  <header>
+  <a href="../index.html" class="home-button">
+  <img src="../icons/home.svg" alt="Accueil" class="vinyle" />
+</a>
+</header>
+
+  <main class="album-info">
+    <img src="../images/dinnerparty.png" alt="Pochette Dinner Party Dessert" class="cover" />
+
+    <div class="streaming-links">
+      <a href="https://open.spotify.com/intl-fr/album/6qqa1vvE1Q3qj2k8Gc3iEY?si=Gn6MvTIVSmSKicOTV6vX8Q" target="_blank">
+        <img src="../icons/spotify.svg" alt="Écouter sur Spotify" />
+      </a>
+      <a href="https://music.apple.com/fr/album/dinner-party-dessert/1532831504" target="_blank">
+        <img src="../icons/apple-music.svg" alt="Écouter sur Apple Music" />
+      </a>
+      <a href="https://dzr.page.link/3yDiB6DoRGS5xP2H6" target="_blank">
+        <img src="../icons/deezer.svg" alt="Écouter sur Deezer" />
+      </a>
+      <a href="https://music.youtube.com/playlist?list=OLAK5uy_lCvIfG8bnC66lBYjLycpBam8GvagNfxO0&si=d_XCEaoDSRZzMn5c" target="_blank">
+        <img src="../icons/youtube-music.svg" alt="Écouter sur YouTube Music" />
+      </a>
+    </div>
+  </main>
+  <!-- à la fin de chaque page HTML, avant </body> -->
+<script>
+  // Au chargement, forcer opacité à 0
+document.body.style.opacity = 0;
+
+window.addEventListener('load', () => {
+  // fade-in sur chargement complet
+  document.body.style.transition = "opacity 0.5s";
+  document.body.style.opacity = 1;
+});
+
+// Pour tous les liens
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    if (this.target === "_blank" || this.href.indexOf('#') > -1) return;
+
+    e.preventDefault();
+    const href = this.href;
+
+    document.body.style.transition = "opacity 0.5s";
+    document.body.style.opacity = 0; // fade-out
+
+    setTimeout(() => {
+      window.location = href;
+    }, 500);
+  });
+});
+</script>
+</body>
+</html>
